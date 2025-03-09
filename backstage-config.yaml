@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: WareHouse
+  description: |
+    A digital Warehouse is a collection of all the reusable services and components,etc.
+  links:
+    - title: Website
+      url: https://frontend-bode-lb7urk8qwetfbxc295b7tg.mgmt.8bb6fbfe53.ccsd.epz001.internal.bosch.cloud/home
+    - title: Documentation
+      url: https://inside-docupedia.bosch.com/confluence2/display/DigitalWarehouse/Warehouse+MetaModel
+    - title: Code Repository
+      url: https://github.boschdevcloud.com/bios-mc-digital-warehouse/dwh-backend/tree/feature/core-utils
+  annotations:
+    github.com/project-slug: backstage/backstage
+    backstage.io/techdocs-ref: dir:.
+    lighthouse.com/website-url: https://backstage.io
+spec:
+  type: library
+  owner: CNCF
+  lifecycle: production
