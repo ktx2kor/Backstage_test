@@ -20,7 +20,5 @@ metadata:
     lighthouse.com/website-url: https://backstage.io
 spec:
   type: library
-  owner: Kiran Patil
+  owner: KiranPatil
   lifecycle: production
-  consumesApis: 
-    - dwh-backend
