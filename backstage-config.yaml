@@ -8,7 +8,7 @@ metadata:
     - title: Website
       url: https://frontend-bode-lb7urk8qwetfbxc295b7tg.mgmt.8bb6fbfe53.ccsd.epz001.internal.bosch.cloud/home
     - title: Documentation
-      url: https://inside-docupedia.bosch.com/confluence2/display/DigitalWarehouse/Warehouse+MetaModel
+      url: https://github.com/ktx2kor/Backstage_test/blob/main/README.md
     - title: Code Repository
       url: https://github.boschdevcloud.com/bios-mc-digital-warehouse/dwh-backend/tree/feature/core-utils
   annotations:
