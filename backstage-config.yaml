@@ -22,4 +22,5 @@ spec:
   type: library
   owner: Kiran Patil
   lifecycle: production
-  consumesApis: dwh-backend
+  consumesApis: 
+    - dwh-backend
