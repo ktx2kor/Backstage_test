@@ -39,5 +39,5 @@ spec:
   lifecycle: production
   owner: KiranPatil
   definition:
-    $text: https://q.sbom.bosch.tech/metadata/v1/openapi.json
+    $text: https://github.com/ktx2kor/Backstage_test/blob/main/openapi.json
   
