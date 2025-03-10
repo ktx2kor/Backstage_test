@@ -16,6 +16,28 @@ metadata:
     backstage.io/techdocs-ref: dir:.
     lighthouse.com/website-url: https://backstage.io
 spec:
-  type: library
+  type: service
+  system: job-exectution-portal
   owner: KiranPatil
+  lifecycle: experimental
+  consumesApis:
+    - csi-deployer
+  #implementsApis:
+  #  - csi-intregation
+  source:
+    type: git
+    target: https://github.com/ktx2kor/Backstage_test.git
+    branch: bdc-develop
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: csi-deployer
+  description: CSI API for fetching and maintaining assets.
+spec:
+  type: openapi
   lifecycle: production
+  owner: KiranPatil
+  definition:
+    $text: https://q.sbom.bosch.tech/metadata/v1/openapi.json
+  
