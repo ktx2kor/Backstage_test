@@ -43,7 +43,7 @@ spec:
     displayName: Bikash Kumar
     email: bk@bsh.com
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Sophie
-  memberOf: [Offboard]
+  memberOf: [PMT]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: User
@@ -54,4 +54,4 @@ spec:
     displayName: Vinay Kumar
     email: sarah-gilroy@example.com
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Rascal
-  memberOf: [Onboard]
+  memberOf: [PMT]
