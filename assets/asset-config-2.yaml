@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: Asset WH 2
+  name: Asset-WH-2
   description: |
     An asset 2 from Warehouse team.
   links:
