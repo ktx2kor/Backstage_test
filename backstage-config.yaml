@@ -37,7 +37,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: KiranPatil
+  owner: KiranPatil1
   definition:
     $text: https://github.com/ktx2kor/Backstage_test/blob/main/openapi.json
   
