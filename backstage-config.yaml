@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: WareHouse
+  name: Asset WH 1
   description: |
     A digital Warehouse is a collection of all the reusable services and components,etc.
   links:
