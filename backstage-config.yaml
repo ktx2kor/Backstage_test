@@ -22,8 +22,8 @@ spec:
   lifecycle: experimental
   consumesApis:
     - csi-deployer
-  #implementsApis:
-  #  - csi-intregation
+  implementsApis:
+   - csi-intregation
   source:
     type: git
     target: https://github.com/ktx2kor/Backstage_test.git
@@ -40,4 +40,17 @@ spec:
   owner: KiranPatil1
   definition:
     $text: https://github.com/ktx2kor/Backstage_test/blob/main/openapi.json
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: csi-intregation
+  description: CSI integratoin assets.
+spec:
+  type: openapi
+  lifecycle: production
+  owner: KiranPatil1
+  definition:
+    $text: https://github.com/ktx2kor/Backstage_test/blob/main/openapi.json    
   
