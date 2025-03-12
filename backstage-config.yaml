@@ -1,5 +1,5 @@
 apiVersion: backstage.io/v1alpha1
-kind: FreelanceLibrary
+kind: Component
 metadata:
   name: WareHouse
   description: |
@@ -18,12 +18,12 @@ metadata:
 spec:
   type: service
   system: backstage-playgroup
-  owner: KiranPatil
+  owner: PMT
   lifecycle: experimental
   consumesApis:
     - csi-deployer
   implementsApis:
-   - csi-intregation
+    - csi-intregation
   source:
     type: git
     target: https://github.com/ktx2kor/Backstage_test.git
@@ -36,8 +36,8 @@ metadata:
   description: CSI API for fetching and maintaining assets.
 spec:
   type: openapi
-  lifecycle: production
-  owner: KiranPatil1
+  lifecycle: experimental
+  owner: PMT
   definition:
     $text: https://github.com/ktx2kor/Backstage_test/blob/main/openapi.json
 
@@ -49,8 +49,7 @@ metadata:
   description: CSI integratoin assets.
 spec:
   type: openapi
-  lifecycle: production
-  owner: KiranPatil1
+  lifecycle: experimental
+  owner: PMT
   definition:
-    $text: https://github.com/ktx2kor/Backstage_test/blob/main/openapi.json    
-  
+    $text: https://github.com/ktx2kor/Backstage_test/blob/main/openapi.json

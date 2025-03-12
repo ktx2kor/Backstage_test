@@ -1,0 +1,57 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: PMT
+  description: PMT TEAM
+spec:
+  type: team
+  profile:
+    displayName: PMT
+    email: pmt@bsh.com
+    picture: https://api.dicebear.com/7.x/identicon/svg?seed=Loki&backgroundType=gradientLinear&backgroundColor=b6e3f4,ffd5dc,ffdfbf,c0aede
+  parent: boxoffice
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: kiran.patil
+spec:
+  profile:
+    displayName: Kiran Patil
+    email: khash@bsh.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Bear&backgroundColor=transparent
+  memberOf: [PMT]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: gaurav.barman
+spec:
+  profile:
+    displayName: Gaurav Barman
+    email: gaurav-barman@bsh.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Bandit&backgroundColor=transparent
+  memberOf: [PMT]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: bikash.kumar
+spec:
+  profile:
+    displayName: Bikash Kumar
+    email: bk@bsh.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Sophie
+  memberOf: [Offboard]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: vinay.kumar
+spec:
+  profile:
+    displayName: Vinay Kumar
+    email: sarah-gilroy@example.com
+    picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Rascal
+  memberOf: [Onboard]

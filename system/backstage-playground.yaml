@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: backstage-playgroup
+  description: Collection of assets system
+spec:
+  owner: PMT
+  domain: BSH
+  type: feature-set
