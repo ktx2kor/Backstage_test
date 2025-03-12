@@ -1,5 +1,5 @@
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: FreelanceLibrary
 metadata:
   name: WareHouse
   description: |
@@ -17,7 +17,7 @@ metadata:
     lighthouse.com/website-url: https://backstage.io
 spec:
   type: service
-  system: job-exectution-portal
+  system: backstage-playgroup
   owner: KiranPatil
   lifecycle: experimental
   consumesApis:
