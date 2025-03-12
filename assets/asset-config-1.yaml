@@ -28,15 +28,3 @@ spec:
     type: git
     target: https://github.com/ktx2kor/Backstage_test.git
     branch: bdc-develop
----
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: csi-deployer
-  description: CSI API for fetching and maintaining assets.
-spec:
-  type: openapi
-  lifecycle: experimental
-  owner: PMT
-  definition:
-    $text: https://github.com/ktx2kor/Backstage_test/blob/main/openapi.json
