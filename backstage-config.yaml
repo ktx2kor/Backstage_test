@@ -11,6 +11,11 @@ metadata:
       url: https://github.com/ktx2kor/Backstage_test/blob/main/README.md
     - title: Code Repository
       url: https://github.com/ktx2kor/Backstage_test/
+  licences:
+    - title: SBOM Licence
+      url: https://q.sbom.bosch.tech/data-views/asset-info?viewId=Product&csimt-uuid=cb2540d4-4367-4b7b-b07c-f27fd4477cd5
+    - title: Certificates
+      url: https://q.sbom.bosch.tech/Certificate/asset-info?viewId=Product&csimt-uuid=cb2540d4-4367-4b7b-b07c-f27fd4477cd5
   annotations:
     github.com/project-slug: backstage/backstage
     backstage.io/techdocs-ref: dir:.
