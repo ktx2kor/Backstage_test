@@ -4,18 +4,18 @@ metadata:
   name: cfw-wh-asset-swelement-cfw-demo-05
   description: This is the test asset to check the creation of the swelement
   annotations:
-    externalReference.advisories: www.google.com
+    externalReference.advisories: https://www.google.com
     project.number: 'cfw-test-123'
   tags:
     - software
     - product
     - development
   links:
-    - url: www.google.com
+    - url: https://www.google.com
       title: External Reference
       icon: link
 spec:
-  type: service
+  type: service # Treating the asset as a service for now
   lifecycle: decommissioned
   owner: M/PJ-CFW
   system: CFW-Warehouse
