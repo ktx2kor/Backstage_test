@@ -1,0 +1,56 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: cfw-wh-asset-swelement-cfw-demo-05
+  description: This is the test asset to check the creation of the swelement
+  annotations:
+    externalReference.advisories: www.google.com
+    project.number: 'cfw-test-123'
+  tags:
+    - software
+    - product
+    - development
+  links:
+    - url: www.google.com
+      title: External Reference
+      icon: link
+spec:
+  type: service
+  lifecycle: decommissioned
+  owner: M/PJ-CFW
+  system: CFW-Warehouse
+  version: 1.0.1
+  dependsOn:
+    - pkg:bosch.product.swelement/test/cfw-wh/cfw-wh-asset-swelement-test-cfw-test-01@1.0.1
+  providesApis: []
+  consumesApis: []
+  attributes:
+    shortDescription: This is the test asset to check the creation of the swelement
+    manufacturer:
+      name: Manohari Priya Sampathkumar (MS/ETT1) (SAME1KOR)
+      email: Sampathkumar.ManohariPriya@in.bosch.com
+      phone: +0123456789
+    supplier:
+      name: Bikash Kumar Nayak (MS/ETT1) (NAB9KOR)
+      email: BikashKumar.Nayak@in.bosch.com
+      phone: +0123456789
+    responsibleOrganization: M/PJ-CFW
+    technicalLead:
+      name: Bikash Kumar Nayak (MS/ETT1) (NAB9KOR)
+      email: BikashKumar.Nayak@in.bosch.com
+      phone: +0123456789
+    projectInformation:
+      projectName: CFW-Warehouse
+      environment: Development
+      productType: ECU
+      partNumber: 'TTRN-12345'
+    lifecycle:
+      date: '2026-08-20'
+      status: Decommissioned
+      statusPlans:
+        - date: '2025-02-14'
+          status: Draft
+        - date: '2025-03-08'
+          status: Phase in
+        - date: '2026-11-26'
+          status: Decommissioned
