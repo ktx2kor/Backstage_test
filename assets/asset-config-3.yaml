@@ -11,9 +11,8 @@ metadata:
     - product
     - development
   links:
-    - url: https://www.google.com
-      title: External Reference
-      icon: link
+    - title: Documentation
+      url: https://github.com/ktx2kor/Backstage_test/blob/main/README.md
 spec:
   type: service # Treating the asset as a service for now
   lifecycle: decommissioned
