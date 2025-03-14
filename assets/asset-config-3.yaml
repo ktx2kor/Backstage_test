@@ -20,7 +20,7 @@ spec:
   system: CFW-Warehouse
   version: 1.0.1
   dependsOn:
-    - Asset-WH-2
+    - component:default/Asset-WH-2
   providesApis: []
   consumesApis: []
   attributes:
