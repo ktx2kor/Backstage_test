@@ -20,7 +20,7 @@ spec:
   system: CFW-Warehouse
   version: 1.0.1
   dependsOn:
-    - pkg:bosch.product.swelement/test/cfw-wh/cfw-wh-asset-swelement-test-cfw-test-01@1.0.1
+    - Asset-WH-2
   providesApis: []
   consumesApis: []
   attributes:
