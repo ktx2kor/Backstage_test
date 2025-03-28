@@ -1,4 +1,4 @@
-apiVersion: backstage.io/v1alpha1
+apiVersion: warehouse/v1alpha1
 kind: ABB
 metadata:
   name: Asset-WH-400
