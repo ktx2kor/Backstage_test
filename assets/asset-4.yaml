@@ -1,5 +1,5 @@
 apiVersion: warehouse/v1alpha1
-kind: ABB
+kind: Component
 metadata:
   name: Asset-WH-400
   description: |
