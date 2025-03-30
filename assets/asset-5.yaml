@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: asset-sbb1
+  namespace: pkg-bosch-namespace-test-cfw-wh-asset
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    bosch.com/purl: pkg:bosch.product.swelement/test/cfw-wh-asset/asset-sbb1@1.0.1
+  tags:
+    - software-element
+spec:
+  type: service
+  lifecycle: production
+  owner: M/PJ-CFW
+  providesApis:
+    - pkg-bosch-product-swelement-test-cfw-wh-cfw-wh-asset-swelement-test-06
+    - pkg-bosch-product-swelement-test-cfw-wh-cfw-wh-asset-swelement-test-07
+  version: 1.0.1
