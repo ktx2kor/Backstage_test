@@ -13,6 +13,6 @@ spec:
   lifecycle: production
   owner: M/PJ-CFW
   hasPart:
-    - Asset-WH-1
-    - Asset-WH-2
+    - component:default/Asset-WH-1
+    - component:default/Asset-WH-2
   version: 1.0.1
