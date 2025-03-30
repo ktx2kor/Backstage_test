@@ -13,6 +13,6 @@ spec:
   lifecycle: production
   owner: M/PJ-CFW
   hasPart:
-    - pkg-bosch-product-swelement-test-cfw-wh-cfw-wh-asset-swelement-test-06
-    - pkg-bosch-product-swelement-test-cfw-wh-cfw-wh-asset-swelement-test-07
+    - Asset-WH-1
+    - Asset-WH-2
   version: 1.0.1
