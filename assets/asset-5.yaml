@@ -12,7 +12,7 @@ spec:
   type: service
   lifecycle: production
   owner: M/PJ-CFW
-  providesApis:
+  hasPart:
     - pkg-bosch-product-swelement-test-cfw-wh-cfw-wh-asset-swelement-test-06
     - pkg-bosch-product-swelement-test-cfw-wh-cfw-wh-asset-swelement-test-07
   version: 1.0.1
