@@ -27,7 +27,7 @@ spec:
         linkTitle:
           type: string
           title: Link Title
-          default: External Dashboard
+          default: External Link
 
   steps:
     - id: fetch-base
@@ -39,11 +39,6 @@ spec:
           name: ${{ parameters.name }}
           target: ${{ parameters.target }}
           linkTitle: ${{ parameters.linkTitle }}
-          targetUrl: ${{ 
-            parameters.target == 'github' && 'https://github.com' ||
-            parameters.target == 'gitlab' && 'https://gitlab.com' ||
-            parameters.target == 'grafana' && 'https://grafana.example.com'
-          }}
 
     - id: register
       name: Register in Catalog
