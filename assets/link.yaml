@@ -1,0 +1,58 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: dynamic-link-template
+  title: Create Component with Dynamic Link
+  description: Generates a link based on dropdown input
+spec:
+  owner: user:guest
+  type: service
+
+  parameters:
+    - title: Component Info
+      required:
+        - name
+        - target
+      properties:
+        name:
+          type: string
+          title: Component Name
+        target:
+          type: string
+          title: Select Target System
+          enum:
+            - github
+            - gitlab
+            - grafana
+        linkTitle:
+          type: string
+          title: Link Title
+          default: External Dashboard
+
+  steps:
+    - id: fetch-base
+      name: Fetch Template
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          target: ${{ parameters.target }}
+          linkTitle: ${{ parameters.linkTitle }}
+          targetUrl: ${{ 
+            parameters.target == 'github' && 'https://github.com' ||
+            parameters.target == 'gitlab' && 'https://gitlab.com' ||
+            parameters.target == 'grafana' && 'https://grafana.example.com'
+          }}
+
+    - id: register
+      name: Register in Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['fetch-base'].output.repoContentsUrl }}
+        catalogInfoPath: ./catalog-info.yaml
+
+  output:
+    links:
+      - title: Open in Catalog
+        url: ${{ steps['register'].output.entityRef | parseEntityRef | entityPath }}
