@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: API
 metadata:
-  name: Asset-WH-1
+  name: Asset-WH-API
   description: |
     An asset from Warehouse team.
   links:
@@ -20,6 +20,7 @@ spec:
   system: backstage-playgroup
   owner: PMT
   lifecycle: experimental
+  definition: "https://dwh-assetservice.dev.mobility-commonframeworks.bosch.tech/WarehouseAsset"
   consumesApis:
     - csi-deployer
   implementsApis:
