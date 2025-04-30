@@ -20,7 +20,8 @@ spec:
   system: backstage-playgroup
   owner: PMT
   lifecycle: experimental
-  definition: "https://dwh-assetservice.dev.mobility-commonframeworks.bosch.tech/WarehouseAsset"
+  definition:
+    $text: https://dwh-assetservice.dev.mobility-commonframeworks.bosch.tech/WarehouseAsset
   consumesApis:
     - csi-deployer
   implementsApis:
