@@ -1,0 +1,599 @@
+openapi: 3.0.1
+info:
+   title: CFW Integration
+   description: This would cover the definition and documentation of the Integration along with the REST end point,
+      incoming request payload format and different responses for creating different deployment for Integration. The http method type
+      would define the underlying action.
+   contact:
+      email: aman.agarwal@in.bosch.com
+   license:
+      name: CFW
+   version: 0.4.7
+servers:
+-  url: http://localhost:3092
+   description: CFW deployment server url
+tags:
+-  name: General
+   description: Gets status and report of tool workers.
+paths:
+  /workers/{worker-id}/status:
+      get:
+        tags:
+        - General
+        operationId: getStatusByWorkerId
+        summary: Get status of a worker
+        description: Gets the execution status of a worker
+        parameters:
+         -  name: worker-id
+            in: path
+            required: true
+            schema:
+               type: string
+               example: xx
+        responses:
+            '200':
+              description: Status for tool worker
+              content:
+                  application/json:
+                    schema:
+                        $ref: '#/components/schemas/ExecutionStatusDTO'
+            '404':
+              description: Not Found
+              content:
+                  application/json:
+                    schema:
+                        $ref: '#/components/schemas/ExecutionStatusDTO'
+
+  /validate:
+      post:
+        tags:
+        - Integration
+        operationId: starts validating
+        summary: Validate system and ECU description files
+        description: Validates the system and ECU description files for syntax, model and conformance to ARXML schema.
+        requestBody:
+            
+            content:
+              application/json:
+                  schema:
+                    $ref: '#/components/schemas/RequestDTO'
+                  example:
+                    execution-id: xxxx-xxxxx-xxxx
+                    workspace-dir: fileshare/subPath
+                    tool-config:
+                      name: abacus
+                      version: 2023.2.1
+                    args:
+                      projectPath: U:\cfw\wheel-rpm-averager-main\saap-component-creation
+                      output: _gen
+                      contract:
+                      - "/SWC_UC_ComputeAvg_Pkg/SWC_UC_ComputeAvg"
+                      - "/SWC_UC_Sender_Pkg/SWC_UC_Sender"
+                      - "/SwComponentTypes/SWC_UC_Receiver"
+                      file: rte_input_files.lst
+
+            required: true
+        responses:
+            '200':
+            
+              description: | 
+                    Validation started.
+                    
+                    
+                    Current design creates only one worker for execution.
+                                    
+                    The `id` value returned in the response can be used as
+                    the `worker-id` parameter in `GET /workers/{worker-id}/status`.
+              content:
+                  application/json:
+                    schema:
+                        $ref: '#/components/schemas/GeneralResponseDTO'
+                        
+              
+                        
+  /generate-rte:
+      post:
+        tags:
+        - Integration
+        operationId: starts generating RTE
+        summary: Generate the RTE libraries and Interfaces
+        description: Genertates the RTE libraries and Interfaces like RTE .c/.h ,OS need, BSW MD file, etc
+        requestBody:
+            content:
+              application/json:
+                  schema:
+                    $ref: '#/components/schemas/RequestDTO'
+                  example:
+                    execution-id: xxxx-xxxxx-xxxx
+                    workspace-dir: fileshare/subPath
+                    tool-config:
+                      name: abacus
+                      version: 2023.2.1
+                    args:
+                      projectPath: U:\cfw\wheel-rpm-averager-main\saap-component-creation
+                      output: _gen
+                      contract:
+                      - "/SWC_UC_ComputeAvg_Pkg/SWC_UC_ComputeAvg"
+                      - "/SWC_UC_Sender_Pkg/SWC_UC_Sender"
+                      - "/SwComponentTypes/SWC_UC_Receiver"
+                      file: rte_input_files.lst
+
+
+            required: true
+        responses:
+            '200':
+            
+              description: | 
+                    Generate RTE started.
+                    
+                    
+                    Current design creates only one worker for execution.
+                                    
+                    The `id` value returned in the response can be used as
+                    the `worker-id` parameter in `GET /workers/{worker-id}/status`.
+              content:
+                  application/json:
+                    schema:
+                        $ref: '#/components/schemas/GeneralResponseDTO'
+
+  /generate-code:
+    post:
+      tags:
+        - Integration
+      operationId: starts generating code for components
+      summary: Generates the code from design
+      description: Genertates the Interfaces e.g language specific src files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestDTO'
+            example:
+              execution-id: xxxx-xxxxx-xxxx
+              workspace-dir: fileshare/subPath
+              tool-configs:
+                name: flux
+                version: 1.9.5
+
+              args:
+                projectPath: U:\cfw\wheel-rpm-averager-main\saap-component-creation
+                output: _gen
+                components:
+                  - "ArbCasAxleBlending"
+                  - "LDI"
+                  - "PT_Mod"
+
+        required: true
+      responses:
+        '200':
+
+          description: |
+            Generate Code started.
+            
+            Current design creates only one worker for execution.
+            
+            The `id` value returned in the response can be used as
+            the `worker-id` parameter in `GET /workers/{worker-id}/status`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralResponseDTO'
+              
+components:
+   schemas:
+      Args:
+        type: object
+        additionalProperties:
+          type: object
+          
+      CfwResponse:
+         type: object
+         properties:
+            execution-id:
+               type: string
+               example: xxxx-xxxx-xx
+            workers-created:
+               type: integer
+               example: 1
+            workers:
+               type: array
+               items:
+                  $ref: '#/components/schemas/Workers'
+                  
+      GeneralResponseDTO:
+        type: object
+        properties:
+          message:
+            type: string
+          code:
+            type: integer
+          data:
+            type: object
+      
+      RequestDTO:
+        type: object
+        properties:
+          execution-id:
+            type: string
+            example: "xxxxx-xxxxxxx-xxxx"
+            x-field-extra-annotation: |-
+              @JsonProperty("execution-id")
+          workspace-dir:
+            type: string
+            example: "fileshare/subPath"
+            x-field-extra-annotation: |-
+              @JsonProperty("workspace-dir")
+          tool-config:
+            $ref: '#/components/schemas/Tool-config'
+          args:
+            $ref: '#/components/schemas/Args'
+        required:
+          - execution-id
+          - tool-config
+            
+      Tool-config:
+          x-field-extra-annotation: |-
+            @JsonProperty("tool-config")
+          type: object
+          properties:
+            name:
+               type: string
+               example: "toolName"
+            version:
+               type: string
+               example: "toolVersion"
+               default: latest
+               
+      Workers:
+         type: object
+         properties:
+            id:
+               type: string
+               example: tool3.1.3fffeaf3c-e338-41ad-80f0-5f586cd05f50
+               
+      CFWContainer:
+        type: object
+        properties:
+          name:
+            type: string
+            example: demoworker
+          image:
+            type: string
+            example: cfwimage:latest
+          inputOutputLabel:
+            type: string
+            example: Output
+          envVars:
+            type: array
+            items:
+              $ref: '#/components/schemas/CFWEnvronmentVariable'
+          commands:
+            type: array
+            items:
+              type: string
+            example: [ "bash","-c","sh /etc/startup.sh;sleep 10;cd one-silcontroller; ./one-silcontroller -c -d --feral --iniconf one-silcontroller.ini" ]
+          storageInfo:
+            type: array
+            items:
+              $ref: '#/components/schemas/CFWStorage'
+          privileged:
+            type: boolean
+            default: false
+            example: false
+          user:
+            type: integer
+            format: int64
+            example: 0
+          capabilities:
+            type: array
+            items:
+              type: string
+            example: [ "SYS_ADMIN", "NET_ADMIN" ]
+            
+      CFWEnvronmentVariable:
+        type: object
+        properties:
+          name:
+            type: string
+            example: Test_Name
+          value:
+            type: string
+            example: demo_ecu_test
+            
+      CFWGroupResponse:
+        type: object
+        properties:
+          name:
+            type: string
+            example: demo
+          message:
+            type: string
+            example: null
+          apTasks:
+            type: array
+            items:
+              $ref: '#/components/schemas/CFWTaskResponse'
+              
+      CFWGroupStatusResponse:
+        type: object
+        properties:
+          name:
+            type: string
+            example: apJob
+          progress:
+            type: string
+            example: null
+          status:
+            type: string
+            example: null
+          apTasks:
+            type: array
+            items:
+              $ref: '#/components/schemas/CFWTaskStatusResponse'
+              
+      CFWInput:
+        type: object
+        properties:
+          files:
+            type: array
+            items:
+              type: string
+              example: null
+          duration:
+            type: integer
+            format: int64
+            default: null
+            example: 100
+            
+      CFWJob:
+        type: object
+        properties:
+          name:
+            type: string
+            example: demo
+          namespace:
+            type: string
+            default: default
+            example: cfw-worker
+          secretName:
+               type: string
+               default: azure-secret
+               example: azure-secret
+          shareName:
+            type: string
+            default: defaultshare
+            example: defaultshare
+          localPath:
+            type: string
+            default: c/temp/logs
+            example: c/temp/logs
+          executionEnvironment:
+            x-field-extra-annotation: |-
+              @JsonProperty("executionEnvironment")
+            type: string
+            default: single
+            example: single
+          nodeOS:
+            type: string
+            example: linux
+          nodePerformance:
+            type: string
+            default: basic
+            example: basic
+          imagePullSecret:
+               type: string
+               example: cfw01-acr-secret
+          nodeName:
+            type: string
+            example: null
+          containers:
+            type: array
+            items:
+              $ref: '#/components/schemas/CFWContainer'
+          totalParallelTasks:
+            x-field-extra-annotation: |-
+              @JsonProperty("totalParallelTasks")
+            type: integer
+            format: int32
+            example: 1
+          duration:
+            type: integer
+            format: int64
+            default: 3000
+            example: 100
+          aptaskIO:
+            type: array
+            items:
+              $ref: '#/components/schemas/CFWTask'
+          externalSecret:
+              $ref: '#/components/schemas/CFWSecret'
+              
+      CFWOutput:
+        type: object
+        properties:
+          files:
+            type: array
+            items:
+              type: string
+            example: [ "--logfile","Log_Test_Output.txt" ]
+      
+      CFWStorage:
+        type: object
+        properties:
+          name:
+            type: string
+            example: vol-mount
+          mountPath:
+            type: string
+            example: /DASY_ROOT_DIR
+          sizeLimit:
+            type: string
+            default: 1Gi
+            example: 8Gi
+          subPath:
+            type: string
+            default: null
+            example: root-folder/sub-folder
+            
+      CFWSecret:
+        type: object
+        properties:
+            name:
+               type: string
+               example: cfwdevst-afs-secret
+            refreshInterval:
+               type: string
+               example: 1h
+            secretStoreRefName:
+               type: string
+               example: cfwdev-kv-secret-store
+            data:
+               type: array
+               items:
+                  $ref: '#/components/schemas/CFWSecretData'
+                  
+      CFWSecretData:
+        type: object
+        properties:
+            secretKey:
+               type: string
+               example: azurestorageaccountname
+            remoteRefKey:
+               type: string
+               example: secret/cfwdevst-storageaccount-name
+               
+      CFWTask:
+        type: object
+        properties:
+          taskName:
+            x-field-extra-annotation: |-
+              @JsonProperty("taskName")
+            type: string
+            default: Task
+            example: demo
+          Input:
+            $ref: '#/components/schemas/CFWInput'
+          Output:
+            $ref: '#/components/schemas/CFWOutput'
+            
+      CFWTaskResponse:
+        type: object
+        properties:
+          taskName:
+            x-field-extra-annotation: |-
+              @JsonProperty("taskName")
+            type: string
+            example: Task_1
+          message:
+            type: string
+            example: null
+          inputFile:
+            x-field-extra-annotation: |-
+              @JsonProperty("inputFile")
+            type: string
+            example: null
+          outputFile:
+            x-field-extra-annotation: |-
+              @JsonProperty("outputFile")
+            type: string
+            example: null
+          duration:
+            type: integer
+            format: int64
+            example: 100
+            
+      CFWTaskStatusResponse:
+        type: object
+        properties:
+          taskName:
+            type: string
+            example: Task_1
+          progress:
+            type: string
+            example: null
+          status:
+            type: string
+            example: null
+            
+      RequestToolLicensesDTO:
+        type: object
+        properties:
+          toolName:
+            type: string
+          toolVersion:
+            type: string
+          numberOfInstances:
+            type: integer
+            
+      RequestUpdateLicenseDTO:
+        type: object
+        properties:
+          toolName:
+            type: string
+          toolVersion:
+            type: string
+          consumeNumberOfLicenses:
+            type: integer
+          releaseNumberOfLicenses:
+            type: integer
+
+      ResponseValidateLicenseDTO:
+        type: object
+        properties:
+          licensesAvailable:
+            type: integer
+          licensesInUse:
+            type: integer
+      
+      MoveFileRequest:
+        type: object
+        properties:
+          cloudProviderEnum:
+            type: string
+            enum:
+              - AZUREFILESHARE
+              - AWS
+          sourceFileShareName:
+            type: string
+          destFileShareName:
+            type: string
+          sourceDirectory:
+            type: string
+          destDirectory:
+            type: string
+          sasToken:
+            type: string
+          storageName:
+            type: string
+
+      ExecutionDTO:
+        type: object
+        properties:
+          executionId:
+            type: string
+          workerID:
+            type: string
+          toolName:
+            type: string
+          workspaceDir:
+            type: string
+          startTime:
+            type: string
+          endTime:
+            type: string
+
+      ExecutionStatusDTO:
+        type: object
+        properties:
+          executionId:
+            type: string
+          workerID:
+            type: string
+          status:
+            type: string
+            enum: [Not started, Pending, Error, Successful, Failed]
+          result:
+            type: string
+          progress:
+            type: string
+            enum: [Initializing, In-Progress, Completed, Worker not available]
